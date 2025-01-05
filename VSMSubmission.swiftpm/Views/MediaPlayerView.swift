@@ -3,7 +3,6 @@ import MediaPlayer
 
 struct MediaPlayerView: UIViewControllerRepresentable {
     @ObservedObject var audioProcessor: AudioProcessor
-    var onFail: (() -> Void)  // Callback to notify when an error occurs
 
     // Create the MPMediaPickerController
     func makeUIViewController(context: Context) -> MPMediaPickerController {
@@ -16,8 +15,7 @@ struct MediaPlayerView: UIViewControllerRepresentable {
         MPMediaLibrary.requestAuthorization { status in
             DispatchQueue.main.async {
                 if status != .authorized {
-                    print("Media library access not granted, loading default drum loop.")
-                    onFail()  // Notify ContentView to load the default drum loop
+                    print("Media library access not granted.")
                 }
             }
         }
@@ -43,8 +41,7 @@ struct MediaPlayerView: UIViewControllerRepresentable {
 
             guard let mediaItem = mediaItemCollection.items.first,
                   let url = mediaItem.assetURL else {
-                print("Error: Could not load song, loading default drum loop.")
-                parent.onFail()  // Notify ContentView to load the default drum loop
+                print("Error: Could not load song.")
                 return
             }
             

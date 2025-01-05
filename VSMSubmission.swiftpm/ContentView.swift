@@ -128,31 +128,24 @@ struct ContentView: View {
                                                 showOptions = true
                                                 loadIsPressed = true
                                             }
-                                            .confirmationDialog("Choose Audio Source",
-                                                                isPresented: $showOptions){
-                                                Button("Play Preloaded Audio") {
-                                                    audioProcessor.loadSample() // Your method to play preloaded audio
-                                                    loadIsPressed = false
-                                                }
-                                                Button("Use Apple Music") {
-                                                    print("Play music from Apple Music") // Replace with your Apple Music integration
-                                                    loadIsPressed = false
-                                                }
-                                                Button("Cancel", role: .cancel) {
-                                                    print("Cancelled")
-                                                    loadIsPressed = false
-                                                }
-
+                                            .confirmationDialog("Choose Audio Source", isPresented: $showOptions) {
+                                                    Button(action: {
+                                                        audioProcessor.loadSample()
+                                                    }) {
+                                                        Text("Pick Preloaded Audio")
+                                                    }
+                                                    
+                                                    Button(action: {
+                                                        print("Pick music from your Apple Music Library")
+                                                    }) {
+                                                        Text("Use Apple Music")
+                                                    }
                                             }
-//                                            .onTapGesture {
-//                                                loadIsPressed = true
-//                                                globalViewText = "Loading sample"
-//
-//                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                                                    loadIsPressed = false
-//                                                    audioProcessor.loadSample()
-//                                                }
-//                                            }
+                                            .onChange(of: showOptions) { isPresented in
+                                                if !isPresented {
+                                                    loadIsPressed = false
+                                                }
+                                            }
                                     }
                                 }
                             )
