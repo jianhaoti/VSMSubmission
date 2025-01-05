@@ -1,10 +1,3 @@
-//
-//  ColorExtension.swift
-//  VSM800
-//
-//  Created by Paul Tee on 7/26/24.
-//
-
 import Foundation
 import SwiftUI
 

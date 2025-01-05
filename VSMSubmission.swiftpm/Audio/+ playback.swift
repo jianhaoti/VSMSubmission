@@ -22,7 +22,7 @@ extension AudioProcessor{
             print("Error starting audio engine: \(error)")
         }
         
-        // find correct positin
+        // find correct position
         guard let file = audioFile else { return }
         if currentTime >= totalDuration {
             currentTime = 0
@@ -76,7 +76,6 @@ extension AudioProcessor{
             if let nodeTime = playerNode.lastRenderTime,
                let playerTime = playerNode.playerTime(forNodeTime: nodeTime) {
                 let elapsedTime = Double(playerTime.sampleTime) / sampleRate
-//                print("Updating currentTime from \(currentTime) to \(elapsedTime)")
                 currentTime = elapsedTime + savedTime
                 
             if currentTime >= totalDuration {
@@ -87,6 +86,7 @@ extension AudioProcessor{
                 stopTimer()
                 play() //loop from beginning
             }
+            
         }
     }
 

@@ -8,7 +8,6 @@ extension AudioProcessor{
         guard let settings = padDistortionSettings[padID] else { return }
         distortionNode.wetDryMix = settings.wetDryMix
         distortionNode.preGain = settings.preGain
-//        objectWillChange.send() // Ensure the UI updates
     }
 
     func setPadDistortionWetDryMix(padID: Int, value: Float) {
@@ -17,7 +16,6 @@ extension AudioProcessor{
             distortionNode.wetDryMix = value
         }
         mostRecentDistortionSettings.wetDryMix = value
-//        objectWillChange.send() // Ensure the UI updates
     }
 
     func setPadDistortionPreGain(padID: Int, value: Float) {
@@ -26,7 +24,6 @@ extension AudioProcessor{
             distortionNode.preGain = value
         }
         mostRecentDistortionSettings.preGain = value
-//        objectWillChange.send() // Ensure the UI updates
     }
 
 }
