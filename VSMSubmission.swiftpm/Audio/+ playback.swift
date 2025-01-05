@@ -83,9 +83,9 @@ extension AudioProcessor{
                 currentTime = totalDuration
                 savedTime = 0
                 currentTime = 0
-                isPlaying = false
                 playerNode.stop()
                 stopTimer()
+                play() //loop from beginning
             }
         }
     }

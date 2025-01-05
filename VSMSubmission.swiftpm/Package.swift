@@ -20,7 +20,7 @@ let package = Package(
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .butterfly),
-            accentColor: .presetColor(.green),
+            accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
@@ -38,7 +38,7 @@ let package = Package(
             name: "AppModule",
             path: ".",
             resources: [
-                .process("Resources") // Include all files in the Resources folder
+                .process("Resources")
             ]
         )
     ],

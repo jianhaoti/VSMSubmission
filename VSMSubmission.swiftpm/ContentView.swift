@@ -132,7 +132,7 @@ struct ContentView: View {
                                                     Button(action: {
                                                         audioProcessor.loadSample()
                                                     }) {
-                                                        Text("Pick Preloaded Audio")
+                                                        Text("Use Preloaded Audio")
                                                     }
                                                     
                                                     Button(action: {
