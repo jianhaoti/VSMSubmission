@@ -4,26 +4,10 @@ import MediaPlayer
 extension AudioProcessor{
     @MainActor
     func loadSample() {
-        // Fallback to Bundle.module
+        // Bundle together drumLoop in Resources folder
         if let url = Bundle.main.url(forResource: "drumLoop", withExtension: "wav") {
-            print("Found file in bundle: \(url)")
             loadAudio(url: url)
         }
-        
-//        else {
-//            // Debugging the resource path
-//            print("Bundle.module resource path: \(Bundle.main.resourcePath ?? "Not found")")
-//            
-//            // Try to list all files in the resource path
-//            if let resourcePath = Bundle.main.resourcePath {
-//                do {
-//                    let files = try FileManager.default.contentsOfDirectory(atPath: resourcePath)
-//                    print("Files in Resources folder: \(files)")
-//                } catch {
-//                    print("Error listing files in Resources folder: \(error)")
-//                }
-//            }
-//        }
     }
 
     @MainActor

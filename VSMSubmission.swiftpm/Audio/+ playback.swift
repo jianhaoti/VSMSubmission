@@ -76,17 +76,17 @@ extension AudioProcessor{
             if let nodeTime = playerNode.lastRenderTime,
                let playerTime = playerNode.playerTime(forNodeTime: nodeTime) {
                 let elapsedTime = Double(playerTime.sampleTime) / sampleRate
-//                print("Updating currentTime from \(currentTime) to \(elapsedTime)")
                 currentTime = elapsedTime + savedTime
                 
             if currentTime >= totalDuration {
                 currentTime = totalDuration
                 savedTime = 0
                 currentTime = 0
-                isPlaying = false
                 playerNode.stop()
                 stopTimer()
+                play() //loop from beginning
             }
+            
         }
     }
 

@@ -31,6 +31,8 @@ extension AudioProcessor{
     // clear out any spillover from effects
     func clearPreviousPadEffects() {
         dynamicsNode.reset()
+        
+        // resetting distortion node casued crashes
 //        distortionNode.reset()
     }
 

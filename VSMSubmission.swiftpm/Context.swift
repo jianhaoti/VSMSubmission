@@ -1,10 +1,3 @@
-//
-//  Theme.swift
-//  VSM800
-//
-//  Created by Paul Tee on 8/8/24.
-//
-
 import SwiftUI
 
 struct Theme {

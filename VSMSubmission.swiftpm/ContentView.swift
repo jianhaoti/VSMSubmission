@@ -27,7 +27,6 @@ struct ContentView: View {
     @State var currentPadAdjPage = 0
 
 
-    // added context
     let theme = Theme()
     
     let leftPortionSize: CGFloat = 0.55
@@ -90,7 +89,7 @@ struct ContentView: View {
                                                     .clipped()
                                                 
                                                 VStack {
-                                                    Spacer().frame(height: globalViewBox.size.height * 0.08) // Adjust the height of the transparent box
+                                                    Spacer().frame(height: globalViewBox.size.height * 0.08)
                                                     HStack {
                                                         Spacer()
                                                         BigBox(height: globalViewBox.size.height * 0.26,
@@ -122,30 +121,18 @@ struct ContentView: View {
                                     }
                                     else {
                                         Text(globalViewText)
-                                            .foregroundColor(loadIsPressed ? Color.gray : Color.blue)
+                                            .foregroundColor(loadIsPressed ? Color.gray : Color.blue) // Change color to gray when pressed
                                             .font(.system(size: 14))
-                                            .onTapGesture{
-                                                showOptions = true
+                                            .onTapGesture {
                                                 loadIsPressed = true
-                                            }
-                                            .confirmationDialog("Choose Audio Source", isPresented: $showOptions) {
-                                                    Button(action: {
-                                                        audioProcessor.loadSample()
-                                                    }) {
-                                                        Text("Pick Preloaded Audio")
-                                                    }
-                                                    
-                                                    Button(action: {
-                                                        print("Pick music from your Apple Music Library")
-                                                    }) {
-                                                        Text("Use Apple Music")
-                                                    }
-                                            }
-                                            .onChange(of: showOptions) { isPresented in
-                                                if !isPresented {
-                                                    loadIsPressed = false
+                                                globalViewText = "Loading sample"
+
+                                                // Delay for the flash effect before loading the sample
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                                    audioProcessor.loadSample()
                                                 }
                                             }
+
                                     }
                                 }
                             )
@@ -311,12 +298,14 @@ struct ContentView: View {
                                                         showDeleteConfirmation = true
                                                     }) {
                                                         ZStack(alignment: .topTrailing) {
-                                                            Rectangle() // Background circle
-                                                                .foregroundColor(.clear) // Make the circle clear
-                                                                .frame(width: hitboxSize, height: hitboxSize) // Set the size of the circle
+                                                            // hitbox
+                                                            Rectangle()
+                                                                .foregroundColor(.clear)
+                                                                .frame(width: hitboxSize, height: hitboxSize)
                                                             
-                                                            Image(systemName: "trash") // Front image
-                                                                .foregroundColor(.gray) // Color of the image
+                                                            // sf symbol
+                                                            Image(systemName: audioProcessor.isPadFavorite(padID: selectedPadID) ? "trash.slash" : "trash")
+                                                                .foregroundColor(audioProcessor.isPadFavorite(padID: selectedPadID) ? .gray: .black.opacity(0.7))
                                                                 .padding(10)
                                                         }
                                                     }
