@@ -22,7 +22,7 @@ extension AudioProcessor{
             print("Error starting audio engine: \(error)")
         }
         
-        // find correct position
+        // find correct positin
         guard let file = audioFile else { return }
         if currentTime >= totalDuration {
             currentTime = 0

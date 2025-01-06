@@ -28,6 +28,7 @@ struct WaveformView: View {
                         .frame(width: 2)
                         .offset(x: chopPosition(for: chopTime, in: geometry) + calculatedOffset(for: geometry))
                 }
+
                 
                 // End marker for selected pad if present
                 if let padID = audioProcessor.selectedPadID {

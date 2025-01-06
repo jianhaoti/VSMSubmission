@@ -121,30 +121,18 @@ struct ContentView: View {
                                     }
                                     else {
                                         Text(globalViewText)
-                                            .foregroundColor(loadIsPressed ? Color.gray : Color.blue)
+                                            .foregroundColor(loadIsPressed ? Color.gray : Color.blue) // Change color to gray when pressed
                                             .font(.system(size: 14))
-                                            .onTapGesture{
-                                                showOptions = true
+                                            .onTapGesture {
                                                 loadIsPressed = true
-                                            }
-                                            .confirmationDialog("Choose Audio Source", isPresented: $showOptions) {
-                                                    Button(action: {
-                                                        audioProcessor.loadSample()
-                                                    }) {
-                                                        Text("Use Preloaded Audio")
-                                                    }
-                                                    
-                                                    Button(action: {
-                                                        print("Pick music from your Apple Music Library")
-                                                    }) {
-                                                        Text("Use Apple Music")
-                                                    }
-                                            }
-                                            .onChange(of: showOptions) { isPresented in
-                                                if !isPresented {
-                                                    loadIsPressed = false
+                                                globalViewText = "Loading sample"
+
+                                                // Delay for the flash effect before loading the sample
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                                    audioProcessor.loadSample()
                                                 }
                                             }
+
                                     }
                                 }
                             )
